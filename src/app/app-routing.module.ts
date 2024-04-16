@@ -15,6 +15,7 @@ import {StudentComponent} from "./view/modules/student/student.component";
 import {BatchregistrationComponent} from "./view/modules/batchregistration/batchregistration.component";
 import {ClassComponent} from "./view/modules/class/class.component";
 import {BookdistributionComponent} from "./view/modules/bookdistribution/bookdistribution.component";
+import {ItemComponent} from "./view/modules/item/item.component";
 
 const routes: Routes = [
   {path: "login", component: LoginComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
     children: [
       {path: "home", component: HomeComponent},
       {path: "employee", component: EmployeeComponent},
+      {path: "item", component: ItemComponent},
       {path: "operation", component: OperationComponent},
       {path: "user", component: UserComponent},
       {path:"reports", component: ArrearsByProgramComponent},

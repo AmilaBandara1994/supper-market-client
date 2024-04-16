@@ -29,11 +29,14 @@ export class MainwindowComponent {
     acdMenuItems = this.authService.acdMenuItems;
     regMenuItems = this.authService.regMenuItems;
     clsMenuItems = this.authService.clsMenuItems;
+    invMenuItems = this.authService.invMenuItems;
 
   isMenuVisible(category: string): boolean {
     switch (category) {
       case 'Admin':
         return this.admMenuItems.some(menuItem => menuItem.accessFlag);
+      case 'Inventory':
+        return this.invMenuItems.some(menuItem => menuItem.accessFlag);
       case 'Academic':
         return this.acdMenuItems.some(menuItem => menuItem.accessFlag);
         case 'Registration':

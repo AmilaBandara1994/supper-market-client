@@ -42,6 +42,19 @@
         </ng-container>
       </mat-expansion-panel>
 
+      <mat-expansion-panel *ngIf="isMenuVisible('Inventory')">
+        <mat-expansion-panel-header>
+          <mat-list-item><a>
+            <mat-icon>person</mat-icon>
+            Inventory</a></mat-list-item>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let menuItem of invMenuItems">
+          <mat-list-item *ngIf="menuItem.accessFlag">
+            <mat-list-item class="item" [routerLink]="menuItem.accessFlag ? menuItem.routerLink : null"><a>{{ menuItem.name }}</a></mat-list-item>
+          </mat-list-item>
+        </ng-container>
+      </mat-expansion-panel>
+
       <mat-expansion-panel *ngIf="isMenuVisible('Academic')">
         <mat-expansion-panel-header>
           <mat-list-item><a>
