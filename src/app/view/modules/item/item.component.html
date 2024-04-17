@@ -16,7 +16,33 @@
         <mat-card-title>Item Search</mat-card-title>
       </mat-card-header>
 
-      <mat-card-content> </mat-card-content>
+      <mat-card-content>
+        <form [formGroup]="ssearch">
+          <mat-form-field appearance="outline">
+            <mat-label>Search By Name</mat-label>
+            <input matInput formControlName="ssname">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Search By Item Status</mat-label>
+            <mat-select formControlName="ssitemstatus">
+              <mat-option value="null">Not Selected</mat-option>
+              <mat-option *ngFor="let items of itemstatuses" [value]="items.id">{{items.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Search By Category</mat-label>
+            <mat-select formControlName="sscategory">
+              <mat-option value="null">Not Selected</mat-option>
+              <mat-option *ngFor="let cats of categories" [value]="cats.id">{{cats.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div>
+            <button mat-raised-button color="primary" (click)="btnSearchMc()" ><mat-icon>search</mat-icon>Search</button>
+            <button mat-raised-button color="primary" (click)="btnSearchClearMc()"><mat-icon>reorder</mat-icon>Clear S earch</button>
+          </div>
+        </form>
+      </mat-card-content>
 
     </mat-card>
   </mat-grid-tile>
@@ -50,17 +76,6 @@
               </form>
             </mat-header-cell>
           </ng-container>
-
-<!--          <ng-container *ngFor="let cscolumn of cscolumns;let i = index;" [matColumnDef]="cscolumn">-->
-<!--            <mat-header-cell *matHeaderCellDef>-->
-<!--              <mat-form [formGroup]="csearch" class="csearch">-->
-<!--                <mat-form-field appearance="outline">-->
-<!--                  <mat-label>{{csprompts[i]}}</mat-label>-->
-<!--                  <input matInput [formControlName]="cscolumn" ()>-->
-<!--                </mat-form-field>-->
-<!--              </mat-form>-->
-<!--            </mat-header-cell>-->
-<!--          </ng-container>-->
 
           <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
           <mat-header-row *matHeaderRowDef="cscolumns"></mat-header-row>

@@ -5,6 +5,12 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {UiAssist} from "../../../util/ui/ui.assist";
 import {ItemService} from "../../../service/itemservice";
+import {Itemstatus} from "../../../entity/itemstatus";
+import {Category} from "../../../entity/category";
+import {Itemstatusservice} from "../../../service/itemstatusservice";
+import {Categoryservice} from "../../../service/categoryservice";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ConfirmComponent} from "../../../util/dialog/confirm/confirm.component";
 
 @Component({
   selector: 'app-item',
@@ -22,15 +28,25 @@ export class ItemComponent {
     'Search by Sale Price', 'Search by Purchase Price', 'Search by Modi'];
 
   public cssearch!: FormGroup;
+  public ssearch!: FormGroup;
 
   item: Array<Item> = [];
   data!: MatTableDataSource<Item>;
   imageurl: string= '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  itemstatuses :Array<Itemstatus> = [];
+  categories :Array<Category> = [];
+
   uiassist: UiAssist;
 
-  constructor(private fb: FormBuilder , private  is: ItemService ) {
+  constructor(
+    private fb: FormBuilder ,
+    private  is: ItemService,
+    private iss: Itemstatusservice,
+    private cs: Categoryservice,
+    private dg: MatDialog,
+  ) {
     this.uiassist = new UiAssist(this);
 
     this.cssearch =  this.fb.group({
@@ -41,6 +57,12 @@ export class ItemComponent {
       'cspprice': new FormControl(),
       'csmodi': new FormControl(),
     });
+
+    this.ssearch = this.fb.group({
+      'ssname': new FormControl(),
+      'ssitemstatus': new FormControl(),
+      'sscategory': new FormControl(),
+    });
   }
 
   ngOnInit() {
@@ -50,6 +72,17 @@ export class ItemComponent {
 
   private initialize() {
     this.createView();
+
+    this.iss.getAllList().then((itemstatus: Itemstatus[]):void =>{
+        this.itemstatuses = itemstatus;
+        console.log(itemstatus)
+    })
+
+    this.cs.getAllList().then((cat:Category[]): void=>{
+      this.categories =  cat;
+      console.log(cat)
+    })
+
   }
 
   createView() {
@@ -93,5 +126,37 @@ export class ItemComponent {
 
     this.data.filter="yys";
   }
+
+  btnSearchMc():void{
+    const ssearchdata = this.ssearch.getRawValue();
+
+    let name = ssearchdata.ssname;
+    let category = ssearchdata.sscategory;
+    let itemstatusid = ssearchdata.ssitemstatus;
+
+    let   query:string = '';
+
+    if (name != null && name.trim() != "") query = query + "&itemname=" + name;
+    if (category != null ) query = query + "&categoryid=" + category;
+    if (itemstatusid != null ) query = query + "&itemstatusid" + itemstatusid;
+    if(query != '') query = query.replace(/^./, "?");
+
+    this.loadTable(query);
+  }
+
+  btnSearchClearMc(){
+
+    const confirm: MatDialogRef<ConfirmComponent>  = this.dg.open(ConfirmComponent,
+      {width: '500px', data: { heading: "Search Clear", message: "Are you sure you want to clear the search."}
+      })
+    confirm.afterClosed().subscribe(async result=>{
+      if(result){
+        this.ssearch.reset();
+        this.loadTable('');
+      }
+    })
+
+  }
+
 
 }
