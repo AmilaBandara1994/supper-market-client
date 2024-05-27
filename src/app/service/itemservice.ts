@@ -26,6 +26,15 @@ export class ItemService {
     return this.http.post<[]>('http://localhost:8080/items', item).toPromise();
   }
 
+  async update(item: Item): Promise<[]|undefined>{
+    return this.http.put<[]>('http://localhost:8080/items', item).toPromise();
+  }
+
+  async delete(id: number): Promise<[]|undefined>{
+    // @ts-ignore
+    return this.http.delete('http://localhost:8080/items/' + id).toPromise();
+  }
+
 
 }
 

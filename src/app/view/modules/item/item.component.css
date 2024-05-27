@@ -17,7 +17,7 @@ mat-card-header { background: #c0d9c3; }
 
 
 /* Employee Form */
-#employeeform {
+#itemform {
   padding-top: 20px;
 }
 
@@ -71,7 +71,7 @@ mat-card-header { background: #c0d9c3; }
   background-color: inherit!important;
 }
 
-#employeeform mat-form-field .ng-dirty{
+#itemform mat-form-field .ng-dirty{
   background-color: gold;
 }
 
