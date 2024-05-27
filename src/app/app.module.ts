@@ -46,6 +46,7 @@ import { BatchregistrationComponent } from './view/modules/batchregistration/bat
 import { ClassComponent } from './view/modules/class/class.component';
 import { BookdistributionComponent } from './view/modules/bookdistribution/bookdistribution.component';
 import { ItemComponent } from './view/modules/item/item.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @NgModule({
@@ -71,31 +72,32 @@ import { ItemComponent } from './view/modules/item/item.component';
     ItemComponent
 
   ],
-  imports: [
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSelectModule,
-    MatTableModule,
-    MatPaginatorModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatGridListModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatButtonModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatDialogModule,
-    HttpClientModule,
-    MatChipsModule,
-    ReactiveFormsModule,
-    MatSlideToggleModule,
-  ],
+    imports: [
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatTableModule,
+        MatPaginatorModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatGridListModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatButtonModule,
+        MatInputModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        MatExpansionModule,
+        MatIconModule,
+        MatDialogModule,
+        HttpClientModule,
+        MatChipsModule,
+        ReactiveFormsModule,
+        MatSlideToggleModule,
+        MatRadioModule,
+    ],
   providers: [
     OperationComponent,
     EmployeeService,

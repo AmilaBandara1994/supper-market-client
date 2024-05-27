@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Item} from "../entity/item";
+import {Employee} from "../entity/employee";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class ItemService {
       return [];
     }
     return items;
+  }
+
+  async add(item: Item): Promise<[]|undefined>{
+    return this.http.post<[]>('http://localhost:8080/items', item).toPromise();
   }
 
 

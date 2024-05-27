@@ -5,7 +5,109 @@
       <mat-card-header>
         <mat-card-title>Item Detail</mat-card-title>
       </mat-card-header>
-      <mat-card-content>  </mat-card-content>
+      <mat-card-content id="employeeform">
+
+        <mat-form  [formGroup]="form" >
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sub Category</mat-label>
+            <mat-select formControlName="subcategory">
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option *ngFor="let subcategory of subcategories" [value]="subcategory">{{subcategory.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Brand</mat-label>
+            <mat-select formControlName="brand">
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option *ngFor="let brand of brands" [value]="brand">{{brand.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label> Item Name</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Item Code</mat-label>
+            <input matInput formControlName="code">
+            <mat-hint>{{ lastitemcode}}</mat-hint>
+          </mat-form-field>
+
+
+          <div style="margin-bottom: 1rem">
+            <mat-radio-group labelPosition="before" formControlName="unittype">
+              <mat-radio-button  *ngFor="let unittype of unittypes" [value]="unittype">{{unittype.name}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Purchase Price</mat-label>
+            <input matInput formControlName="pprice">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Sale Price</mat-label>
+            <input matInput formControlName="sprice">
+          </mat-form-field>
+
+          <div id="imgpanel">
+            <img [src]="imageitemurl">
+            <input id="userImage" hidden="hidden" (change)="selectImage($event)" Select type="file" formControlName="photo">
+            <label for="userImage" id="selectbutton">Select</label>
+            <label id="clearbutton" (click)="clearImage()">Clear</label>
+          </div>
+
+
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Quantity </mat-label>
+            <input matInput formControlName="quantity">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>ROP</mat-label>
+            <input matInput formControlName="rop">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Item Status</mat-label>
+            <mat-select formControlName="itemstatus">
+              <mat-option [value]="null" selected>Not Selected</mat-option>
+              <mat-option *ngFor="let itemstatus of itemstatuses" [value]="itemstatus">{{itemstatus.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Date of Introduced</mat-label>
+            <input matInput [min]="mindate" [matDatepicker]="introdate" formControlName="dointroduced">
+            <mat-datepicker-toggle matIconSuffix [for]="introdate"></mat-datepicker-toggle>
+            <mat-datepicker #introdate></mat-datepicker>
+          </mat-form-field>
+
+
+          <div id="butpanel">
+            <button mat-raised-button (click)="add()" [disabled]="">Add</button>
+            <button mat-raised-button (click)="clear()">Clear</button>
+            <button mat-raised-button (click)="update()" [disabled]="">Update</button>
+            <button mat-raised-button (click)="delete()" [disabled]="">Delete</button>
+          </div>
+
+        </mat-form>
+      </mat-card-content>
+
+
     </mat-card>
   </mat-grid-tile>
 
